@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shanmathi Mahesh — Field Notes in Computational Neuroscience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #FAEAEE;
+    --paper-dark: #F2D6DE;
+    --ink: #2E1620;
+    --ink-soft: #6B4150;
+    --garnet: #C2356B;
+    --title-red: #E0312A;
+    --botanical: #8C4A63;
+    --gold: #C79A6B;
+    --rule: rgba(46,22,32,0.18);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(199,154,107,0.10), transparent 45%),
+      radial-gradient(circle at 85% 30%, rgba(194,53,107,0.07), transparent 40%);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--garnet); text-decoration: none; }
+  a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+  .wrap{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    padding: 96px 0 60px;
+    overflow: hidden;
+  }
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--garnet);
+    margin: 0 0 18px;
+  }
+  .eyebrow::before{ content: "— "; }
+  h1{
+    font-family: 'Alex Brush', cursive;
+    font-weight: 400;
+    font-size: clamp(54px, 8vw, 96px);
+    line-height: 1.0;
+    margin: 0 0 16px;
+    color: var(--title-red);
+  }
+  .subhead{
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 30px;
+  }
+  .placeholder{
+    color: var(--garnet);
+    font-style: italic;
+  }
+  .cta{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--ink);
+    padding: 11px 18px;
+    color: var(--ink);
+  }
+  .cta:hover{ background: var(--ink); color: var(--paper); text-decoration:none; }
+
+  /* ---------- About ---------- */
+  .about{
+    padding: 10px 0 70px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .about .wrap{
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 36px;
+  }
+  .about-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 4px;
+  }
+  .about p{
+    margin: 0 0 16px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 64ch;
+  }
+  .about strong{ color: var(--ink); font-weight: 600; }
+
+  /* ---------- Studies ---------- */
+  .studies{ padding: 70px 0 40px; }
+  .studies h2{
+    font-family: 'Alex Brush', cursive;
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 1;
+    color: var(--title-red);
+    margin: 0 0 10px;
+  }
+  .studies .section-note{
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0 0 44px;
+  }
+
+  .study-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .specimen-card{
+    position: relative;
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    padding: 28px 26px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .specimen-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(46,22,32,0.12);
+  }
+  .plate-seal{
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    transform: rotate(-6deg);
+  }
+  .specimen-card:nth-child(2) .plate-seal{ transform: rotate(4deg); }
+  .specimen-card:nth-child(3) .plate-seal{ transform: rotate(-3deg); }
+  .specimen-card:nth-child(4) .plate-seal{ transform: rotate(5deg); }
+
+  .study-meta{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--botanical);
+    margin: 14px 0 10px;
+  }
+  .specimen-card h3{
+    font-family: 'Alex Brush', cursive;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--title-red);
+    margin: 0 0 12px;
+  }
+  .specimen-card p.desc{
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+  }
+  .card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px dashed var(--rule);
+    padding-top: 14px;
+  }
+  .status{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .repo-link{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: 70px 0 60px;
+    text-align: center;
+  }
+  footer p{
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    max-width: 50ch;
+    margin: 0 auto 18px;
+  }
+  footer .links{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+  }
+  footer .links a{ margin: 0 10px; }
+
+  @media (max-width: 760px){
+    .about .wrap{ grid-template-columns: 1fr; }
+    .study-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+  HOW TO USE THIS FILE
+  Every spot you need to fill in is marked with a comment like
+  this one, plus pink italic placeholder text in [ brackets ].
+  Just delete the bracketed text and type your own — leave the
+  HTML tags around it alone (the <p class="..."> bits).
+============================================================ -->
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">A self-directed field journal</p>
+    <h1>From canvas<br/>to cortex.</h1>
+
+    <!-- WRITE HERE: 1–2 sentences introducing the whole project series — what it is and why it exists -->
+    <p class="subhead placeholder">[ Your one or two sentence introduction goes here — what this notebook is and why you're keeping it. ]</p>
+
+    <a href="#studies" class="cta">Open the notebook ↓</a>
+
+    <!-- ARTWORK PLACEHOLDER: send me your own neuron/brain piece and I'll drop it in right here as
+         <img src="your-art.jpg" alt="..." class="hero-art"> once you have a file for it. -->
+  </div>
+</header>
+
+<section class="about">
+  <div class="wrap">
+    <p class="about-label">Field Notes</p>
+    <div>
+      <!-- WRITE HERE: 2-3 sentences about your background — degree, research experience, and your art identity -->
+      <p class="placeholder">[ Your background paragraph goes here — your degree, research experience (transcriptomics, behavioural neuroscience), and the fact that you're also a painter / sketch artist / singer / poet. ]</p>
+
+      <!-- WRITE HERE: 2-3 sentences on why this project series exists — the throughline connecting your past work to this -->
+      <p class="placeholder">[ Your "why this project exists" paragraph goes here — e.g. no lab access this stretch, so this is your proof of independent learning and follow-through. ]</p>
+    </div>
+  </div>
+</section>
+
+<section class="studies" id="studies">
+  <div class="wrap">
+    <h2>The Notebook</h2>
+
+    <!-- WRITE HERE (optional): a short note on how the four projects connect — can also just delete this line -->
+    <p class="section-note placeholder">[ Optional short note about how the four projects connect to each other. ]</p>
+
+    <!-- For each card below:
+         1. Replace the [ bracketed ] description with 1-2 real sentences about that month's project.
+         2. Change the status text from "In progress" / "Upcoming" to "Done" once finished.
+         3. Replace href="#" on "View notebook →" with the real link to your GitHub repo/notebook.
+    -->
+
+    <div class="study-grid">
+
+      <article class="specimen-card">
+        <span class="plate-seal">I</span>
+        <p class="study-meta">Python · NumPy · Matplotlib</p>
+        <h3>The Single Cell</h3>
+        <p class="desc placeholder">[ Describe Month 1's project here — the leaky integrate-and-fire neuron model. ]</p>
+        <div class="card-footer">
+          <span class="status">In progress</span>
+          <a href="#0" class="repo-link">View notebook →</a>
+        </div>
+      </article>
+
+      <article class="specimen-card">
+        <span class="plate-seal">II</span>
+        <p class="study-meta">Pandas · Statistics</p>
+        <h3>Reading the Noise</h3>
+        <p class="desc placeholder">[ Describe Month 2's project here — the real-data stress/cognition analysis. ]</p>
+        <div class="card-footer">
+          <span class="status">Upcoming</span>
+          <a href="#0" class="repo-link">View notebook →</a>
+        </div>
+      </article>
+
+      <article class="specimen-card">
+        <span class="plate-seal">III</span>
+        <p class="study-meta">Brian2 · Spiking Networks</p>
+        <h3>A Network That Learns</h3>
+        <p class="desc placeholder">[ Describe Month 3's project here — the STDP spiking network. ]</p>
+        <div class="card-footer">
+          <span class="status">Upcoming</span>
+          <a href="#0" class="repo-link">View notebook →</a>
+        </div>
+      </article>
+
+      <article class="specimen-card">
+        <span class="plate-seal">IV</span>
+        <p class="study-meta">Scikit-learn · Predictive Modelling</p>
+        <h3>Mechanism Meets the Real World</h3>
+        <p class="desc placeholder">[ Describe Month 4's project here — the mental health predictive model. ]</p>
+        <div class="card-footer">
+          <span class="status">Upcoming</span>
+          <a href="#0" class="repo-link">View notebook →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <!-- WRITE HERE (optional): a closing line about the site / your approach — fine to leave as-is too -->
+    <p class="placeholder">[ Optional closing line about the site or your approach to documenting it. ]</p>
+
+    <!-- UPDATE: replace each # with your actual GitHub profile, email (use mailto:you@email.com), and LinkedIn links -->
+    <p class="links">
+      <a href="#0">GitHub</a> · <a href="#0">Email</a> · <a href="#0">LinkedIn</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
